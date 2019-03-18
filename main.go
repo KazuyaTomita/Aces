@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
 
 /*
 This is poker AI engine and implements UPI (Universal Poker Interface)[https://cdn.shopify.com/s/files/1/0769/9693/files/UPI-documentation_e9050fc5-e6e6-4f37-8611-04819b636333.pdf]
@@ -8,13 +12,17 @@ This is poker AI engine and implements UPI (Universal Poker Interface)[https://c
 func main() {
 	// first we wait command from GUI(CUI) server.
 	// After that, we execute something following the command.
-	fmt.Printf("start\n")
-	for {
-		search()
-		choose_action()
-		end_game()
+	stdin := bufio.NewScanner(os.Stdin)
+	for stdin.Scan() {
+		switch stdin.Text() {
+		case "is_ready":
+			fmt.Println("is_ready ok!")
+		case "exit":
+			panic("exit")
+		default:
+			fmt.Println("other")
+		}
 	}
-
 }
 
 func search() {
