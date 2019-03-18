@@ -17,6 +17,8 @@ func main() {
 		switch stdin.Text() {
 		case "is_ready":
 			fmt.Println("is_ready ok!")
+		case "exit":
+			panic("exit")
 		default:
 			fmt.Println("other")
 		}
