@@ -1,7 +1,19 @@
-# Aces
+Aces
+====
+
 Texas Hold'em Poker AI written in Go.
 
-Now we are creating rule parts of the game. Then we will make algorithm which includes search method, value function and policy net. Any question and pull request are always welcome.
+## Description
+Poker AI which follows modified UPI(Universal Poker Interface). 
+We want to build poker AI which relies on just calculation not human heuristic like AlphaZero.
 
-p.s.
-Now we are thinking implementing algorithm like AlphaZero, which uses MCTS and Deep Neural Networks although I am not sure that they are applicable to games with imperfect information.
+## Contribution
+Feel free to join us.
+
+## Licence
+
+[MIT](https://github.com/tcnksm/tool/blob/master/LICENCE)
+
+## Author
+
+[KazuyaTomita](https://github.com/KazuyaTomita)
