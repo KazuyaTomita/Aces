@@ -36,6 +36,7 @@ func main() {
 			panic("exit")
 		case "gameover":
 			// do something
+			// maybe register reward for learning(learning itself is done with much data)
 		case "stop":
 			choose_best_action()
 		default:
@@ -46,6 +47,7 @@ func main() {
 
 func preparaForGame() {
 	// do some preparation
+	// maybe clear cache
 }
 
 func setState() {
