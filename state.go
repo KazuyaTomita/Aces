@@ -70,3 +70,10 @@ type ActionHistory struct {
 	RiverActionHistory []Action
 }
 
+// make Node from State
+func (s *State) toNode() Node {
+	return Node{
+		State : *s,
+	}
+}
+
