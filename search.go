@@ -44,7 +44,7 @@ func defaultPolicy(node *Node) int {
 }
 
 func backup(reward int, node *Node) {
-	// backpropagation
+	// backpropagation reward and something like that
 }
 
 func bestChild(node *Node, c int) Node {
