@@ -77,3 +77,9 @@ func (s *State) toNode() Node {
 	}
 }
 
+// return a next state after a specific action
+func (s *State) getStateAfter(a Action) State {
+	return State{}
+}
+
+
