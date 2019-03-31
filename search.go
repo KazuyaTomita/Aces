@@ -8,8 +8,6 @@ package main
 const Ucb1Coeficient = 0.5
 
 type Search struct {
-	// position index from button. ex) SB is 1, BB is 2.
-	RootNode Node
 }
 
 func (s *Search) UCB1Search(state *State) Action {
@@ -18,13 +16,15 @@ func (s *Search) UCB1Search(state *State) Action {
 	// it will be different in both learning and playing case
 	for i := 0; i < 1600; i++ {
 		nextNode := treePolicy(&node)
-		reward := defaultPolicy(&node)
+		reward := defaultPolicy(node.State)
 		backup(reward, &nextNode)
 	}
 	bestChild := bestChild(&node, 0)
 	return node.getActionFor(&bestChild)
 }
 
+// go into tree, following UCB1 formula
+// just go into already an expanded-tree or expand a new node.
 func treePolicy(node *Node) Node {
 	for !node.isTerminal() {
 		if !node.isExpanded() {
@@ -33,20 +33,30 @@ func treePolicy(node *Node) Node {
 		newNode := bestChild(node, Ucb1Coeficient)
 		node = &newNode
 	}
-	// go into tree following UCB1 formula
-	// just go into already an expanded-tree or expand a new node.
 	return *node
 }
 
+/*
+expand the game tree.
+Namely, a new node is added to the game tree, following a certain action distribution when choosing an action.
+ */
 func expand(node *Node) Node {
-	// return next node
-	return Node{}
+	action := getAction(node.State)
+	nextNode := node.getNextNodeAfter(&action)
+	return nextNode
 }
 
-
-func defaultPolicy(node *Node) int {
+/*
+do play out and get a reward
+ */
+func defaultPolicy(state *State) int {
 	// do play out
-	return 1
+	for !state.isTerminal() {
+		action := getAction(state)
+		nextState := state.getStateAfter(&action)
+		state = &nextState
+	}
+	return state.getReward()
 }
 
 func backup(reward int, node *Node) {
@@ -54,5 +64,16 @@ func backup(reward int, node *Node) {
 }
 
 func bestChild(node *Node, c int) Node {
+	// argmax{(Q/N) + c√{(2lnN)/N}}
+	// N is the node's visited count and Q is a total of rewards.
 	return Node{}
+}
+
+func getAction(state *State) Action {
+	/*
+	Original MCTS chooses an action randomly.
+	However, the randomness is not so important, we can limit actions in fact.
+	AlphaZero and its derivatives uses a trained neural network for choosing an action.
+	*/
+	return Action{}
 }

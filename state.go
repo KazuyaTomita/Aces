@@ -73,13 +73,23 @@ type ActionHistory struct {
 // make Node from State
 func (s *State) toNode() Node {
 	return Node{
-		State : *s,
+		State : s,
 	}
 }
 
 // return a next state after a specific action
-func (s *State) getStateAfter(a Action) State {
+func (s *State) getStateAfter(a *Action) State {
 	return State{}
 }
+
+func (s *State) getReward() int {
+	return 1
+}
+
+func (s *State) isTerminal() bool {
+	return true
+}
+
+
 
 
