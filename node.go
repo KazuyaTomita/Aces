@@ -5,15 +5,20 @@ import "reflect"
 type Node struct {
 	State State
 	Children []Node
-	Parent Node
-}
-
-func (node *Node) ==() bool {
-	return true
+	Parent *Node
 }
 
 func (node *Node) getActionFor(nextNode *Node) Action {
 	return Action{}
+}
+
+func (node *Node) getNextNodeAfter(action *Action) Node {
+	return Node{}
+}
+
+func (node *Node) addChildNode(child *Node) {
+	node.Children = append(node.Children, *child)
+	child.Parent = node
 }
 
 // game is over when the button player did an action but raise
