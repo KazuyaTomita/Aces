@@ -16,7 +16,7 @@ func (s *Search) UCB1Search(state *State) Action {
 	// it will be different in both learning and playing case
 	for i := 0; i < 1600; i++ {
 		nextNode := treePolicy(&node)
-		reward := defaultPolicy(&node)
+		reward := defaultPolicy(node.State)
 		backup(reward, &nextNode)
 	}
 	bestChild := bestChild(&node, 0)
@@ -41,15 +41,22 @@ expand the game tree.
 Namely, a new node is added to the game tree, following a certain action distribution when choosing an action.
  */
 func expand(node *Node) Node {
-	action := getAction(node)
+	action := getAction(node.State)
 	nextNode := node.getNextNodeAfter(&action)
 	return nextNode
 }
 
-
-func defaultPolicy(node *Node) int {
+/*
+do play out and get a reward
+ */
+func defaultPolicy(state *State) int {
 	// do play out
-	return 1
+	for !state.isTerminal() {
+		action := getAction(state)
+		nextState := state.getStateAfter(&action)
+		state = &nextState
+	}
+	return state.getReward()
 }
 
 func backup(reward int, node *Node) {
@@ -62,7 +69,7 @@ func bestChild(node *Node, c int) Node {
 	return Node{}
 }
 
-func getAction(node *Node) Action {
+func getAction(state *State) Action {
 	/*
 	Original MCTS chooses an action randomly.
 	However, the randomness is not so important, we can limit actions in fact.
