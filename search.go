@@ -36,6 +36,10 @@ func treePolicy(node *Node) Node {
 	return *node
 }
 
+/*
+expand the game tree.
+Namely, a new node is added to the game tree, following a certain action distribution when choosing an action.
+ */
 func expand(node *Node) Node {
 	action := getAction(node)
 	nextNode := node.getNextNodeAfter(&action)
@@ -63,6 +67,6 @@ func getAction(node *Node) Action {
 	Original MCTS chooses an action randomly.
 	However, the randomness is not so important, we can limit actions in fact.
 	AlphaZero and its derivatives uses a trained neural network for choosing an action.
-	 */
-	 return Action{}
+	*/
+	return Action{}
 }
