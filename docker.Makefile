@@ -3,7 +3,7 @@
 #
 
 # Overridable env vars
-DOCKER_MOUNTS ?= -v "$(CURDIR)":/go/src/PockerView
+DOCKER_MOUNTS ?= -v "$(CURDIR)":/go/src/Aces
 DOCKER_SHELL ?= ash
 DOCKER_CONTAINER_NAME ?=
 DOCKER_GO_BUILD_CACHE ?= y
